@@ -1,5 +1,5 @@
 .page {
-  --background: #fafafa;
+  --background: #000000;
   --foreground: #fff;
 
   --text-primary: #000;
@@ -15,6 +15,7 @@
   justify-content: center;
   font-family: var(--font-geist-sans);
   background-color: var(--background);
+  background-image: var(--background-image);
 }
 
 .main {
@@ -27,6 +28,15 @@
   justify-content: space-between;
   background-color: var(--foreground);
   padding: 120px 60px;
+}
+
+.nav {
+  display: flex;
+  min-height: 10vh;
+  width: 100%;
+  padding: 5%;
+  align-items: left;
+  justify-content: center;
 }
 
 .intro {
@@ -125,11 +135,14 @@ a.secondary {
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
+    
   }
 
   .page {
-    --background: #000;
+    --background: #000000;
     --foreground: #000;
+    --background-image: radial-gradient(ellipse at top left, #50e49f, #4c05d0);
+  font-synthesis: none;
 
     --text-primary: #ededed;
     --text-secondary: #999;
