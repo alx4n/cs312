@@ -4,7 +4,7 @@ import classes from './NewPost.module.css';
 function NewPost(): React.JSX.Element {
     const [ enteredBody, setEnteredBody ] = useState('');
   
-    function changeBodyHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setEnteredBody(event.target.value);
     }
 
