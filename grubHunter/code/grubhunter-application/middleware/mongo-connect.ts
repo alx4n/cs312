@@ -9,9 +9,7 @@ async function mongoConnect(): Promise<unknown> {
     let db;
     try {    
         await mongoose.createConnection(MONGO_URI);
-        db = await mongoose.connect(MONGO_URI, {
-            dbName: "GrubHunter"
-        });
+        db = await mongoose.connect(MONGO_URI);
     } catch(err) {
         return err;
     }

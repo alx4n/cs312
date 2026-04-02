@@ -44,10 +44,10 @@ export async function updateWishlist( locationId: string, userId: string, action
     let update = {};
 
     switch (action) {
-        case "add": update = { $push: { on_wishlist: userId } };
+        case "add": update = { $push: { onWishlist: userId } };
         break;
 
-        case "remove": update = { $pull: { on_wishlist: userId } };
+        case "remove": update = { $pull: { onWishlist: userId } };
         break;
     }
     
