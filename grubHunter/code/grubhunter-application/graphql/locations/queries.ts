@@ -7,7 +7,7 @@ export const QueryResolvers = {
     },
     locationsById: async (_:unknown, param: { location_ids: string[] }) => {
         const locations = await findLocationsByID(param.location_ids);
-        return await locations;
+        return locations;
     },
     onUserWishlist: async (_:unknown, param: {user_id: string}) => {
         return await onWishlist(param.user_id);

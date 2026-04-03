@@ -23,8 +23,9 @@ export async function findAllLocations(): Promise<LocationType[] | []> {
 }
 
 export async function findLocationsByID( locationIds: string[]): Promise<Array<LocationType> | [] > {
-    let filter = { locationId: locationIds };
-
+    let filter = { id: locationIds };
+    console.log(filter);
+    console.log(await findLocations(filter));
     return await findLocations(filter);
 }
 

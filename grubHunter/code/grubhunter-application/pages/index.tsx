@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import { LocationList } from "@/components/locations-list";
 import { InferGetStaticPropsType, GetStaticProps, GetStaticPropsContext } from "next";
 import { findAllLocations } from "@/mongoose/locations/services";
@@ -7,9 +6,8 @@ import { LocationType } from "@/mongoose/locations/schema";
 import mongoConnect from "@/middleware/mongo-connect";
 
 export default function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  let title = "GrubHunter Application";
-  console.log(props.loc_json)
-  let locations : LocationType[] = JSON.parse(props.loc_json)
+  const title = "GrubHunter Application";
+  let locations : LocationType[] = JSON.parse(props.loc_json);
   
   return (
     <>
