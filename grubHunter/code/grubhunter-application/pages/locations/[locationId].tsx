@@ -6,26 +6,27 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import { ParsedUrlQuery } from "querystring";
 
 const LocationDetailPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    let location = JSON.parse(props.loc_json);
     return (
-        <LocationDetails location_item={props.location}/>
+        <LocationDetails location_item={location}/>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-    console.log(context.params['locationId']);
     let location_id : string[] = [context.params['locationId']!.toString()];
-    console.log(location_id)
-    let location: LocationType[] = [];
+    let location: Array<LocationType | undefined> = [];
+    let loc_json = "";
     try {
         await mongoConnect();
         location = await findLocationsByID(location_id);  
-        console.log(location);
+        //console.log(location);
+        loc_json = JSON.stringify(location);
     } catch (err) {
         console.log(err);
     }
     return {
         props: {
-            location
+            loc_json
         }
     }
 }

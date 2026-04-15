@@ -25,6 +25,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "graphql/locations/custom.gql.ts"  ],
+, "graphql/locations/custom.gql.ts", "jest.config.js"  ],
   "exclude": ["node_modules"]
 }

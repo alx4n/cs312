@@ -1,4 +1,4 @@
-import "./index.module.css";
+import styles from "./index.module.css";
 import { LocationListItem } from "@/components/locations-list-item/index";
 import { LocationType } from "@/mongoose/locations/schema";
 
@@ -13,7 +13,7 @@ export const LocationList = (props: LocationListProps): React.JSX.Element => {
         )
     })
     return (
-        <div>
+        <div className={styles.root}>
             {output}
         </div>
     );

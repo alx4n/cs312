@@ -1,9 +1,10 @@
 export type LocationID = {
-    id: string | string[];
+    location_id: string | string[];
 };
 
 export type LocationWishlist = {
-    onWishlist: { 
-        $user: string[];
+    on_wishlist: { 
+        $in: string[];
     }
 };
+

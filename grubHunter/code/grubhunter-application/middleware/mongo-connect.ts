@@ -1,20 +1,64 @@
-import mongoose from "mongoose";
+import mongoose, {ConnectOptions} from "mongoose";
 
-async function mongoConnect(): Promise<unknown> {
-    const MONGO_URI = process.env.MONGO_URI || "";
-    if (!MONGO_URI.length) {
-        throw new Error("MONGO_URI environment variable not set")
+declare global {
+    var mongoose: { conn: unknown; promise: unknown };
+}
+
+const MONGO_URI = process.env.MONGO_URI || "";
+
+if (!MONGO_URI.length) 
+{
+    throw new Error("MONGO_URI environment variable is not set (.env.local)");
+}
+
+let cached = global.mongoose;
+
+if (!cached) 
+{
+    cached = global.mongoose = { conn: null, promise: null };
+}
+
+
+async function mongoConnect(): Promise<unknown> 
+{
+    if (cached.conn) 
+    {
+        return cached.conn;
     }
-    //await mongoose.disconnect();
-    let db;
-    try {    
-        await mongoose.createConnection(MONGO_URI);
-        db = await mongoose.connect(MONGO_URI);
-    } catch(err) {
-        return err;
+
+    if (!cached.promise) 
+    {
+        const opts: ConnectOptions = {
+            bufferCommands: false,
+            maxIdleTimeMS: 10000,
+            serverSelectionTimeoutMS: 10000,
+            socketTimeoutMS: 20000,
+        };
+
+        cached.promise = mongoose
+            .connect(MONGO_URI, opts)
+            .then((mongoose) => mongoose)
+            .catch((err) => 
+            {
+                throw new Error(String(err));
+            });
     }
-    
-    return db;
+    try 
+    {
+        cached.conn = await cached.promise;
+    }
+    catch (err) 
+    {
+        throw new Error (String(err));
+    }
+
+    return cached.conn;
 }
 
 export default mongoConnect;
+
+
+
+
+
+

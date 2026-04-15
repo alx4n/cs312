@@ -27,5 +27,18 @@ services:
     volumes:
       - ./.docker/grubhunter-backend/seed-mongodb.js:/docker-entrypoint-initdb.d/seed-mongodb.js
       - mongodb_data_container:/data/db
+  jest:
+    container_name: grubhunter-jest
+    image: node:lts-alpine
+    working_dir: /home/node/code/grubhunter-application
+    volumes:
+      - ./code:/home/node/code
+    depends_on:
+      - backend
+      - application
+    environment:
+      - NODE_ENV=test
+    tty: true
+    command: "npm run testWatch"
 volumes:
   mongodb_data_container:
